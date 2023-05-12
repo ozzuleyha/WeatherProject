@@ -18,8 +18,8 @@ const HomeScreen = () => {
           zIndex: 1,
         }}
         title={"Home"}
-        leftIcon={<View style={styles.outerIcon}><Ionicons name="ios-menu-outline" size={36} /></View>}
-        rightIcon={<View style={styles.outerIcon}><AntDesign name="calendar" size={36} /></View>}
+        leftIcon={<View style={styles.outerIcon}><Ionicons name="ios-menu-outline" size={36} color= {"#fff"}/></View>}
+        rightIcon={<View style={styles.outerIcon}><AntDesign name="calendar" size={32} color= {"#fff"}/></View>}
       />
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       </ImageBackground>
