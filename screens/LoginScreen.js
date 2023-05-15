@@ -6,7 +6,7 @@ import { Button } from "@rneui/themed";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 as Logo } from "@expo/vector-icons";
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [shown, setShown] = useState(true);
@@ -20,42 +20,48 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate("Home");
   };
 
-
   return (
     <View style={styles.container}>
-      <Logo
-            style={styles.LogoStyle}
-            name={"cloud-sun-rain"}
-          />
+      <Logo style={styles.LogoStyle} name={"cloud-sun-rain"} />
       <TextInput
-      inputStyle={styles.inputStyle}
+        inputStyle={styles.inputStyle}
         value={username}
         placeholder={"Username"}
         onChangeText={(text) => setUsername(text)}
         autoCapitalize={"none"}
         autoCorrect={false}
       />
-      <TextInput
-        inputStyle={styles.inputStyle}
-        value={password}
-        placeholder={"Password"}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry={shown}
-        autoCapitalize={"none"}
-        autoCorrect={false}
-      >
-        <Pressable onPress={togglePasswordVisiblity}>
-          <MaterialCommunityIcons name={shown ? "eye-off" : "eye"} size={22} color="#232323"    
-          />
-        </Pressable>
-      </TextInput>
+      <View style={styles.outerPasswordTextInput}>
+        <TextInput
+          inputStyle={styles.inputStyle}
+          value={password}
+          placeholder={"Password"}
+          onChangeText={(text) => setPassword(text)}
+          secureTextEntry={shown}
+          autoCapitalize={"none"}
+          autoCorrect={false}
+        ></TextInput>
 
-      <Button type="solid" radius={999} buttonStyle={styles.submitButton} onPress={HandleSubmitButton}>
+        <TouchableOpacity onPress={togglePasswordVisiblity}>
+          <MaterialCommunityIcons
+            name={shown ? "eye-off" : "eye"}
+            size={22}
+            color="#232323"
+          />
+        </TouchableOpacity>
+      </View>
+
+      <Button
+        type="solid"
+        radius={999}
+        buttonStyle={styles.submitButton}
+        onPress={HandleSubmitButton}
+      >
         Submit
       </Button>
     </View>
   );
-};
+};r
 
 export default LoginScreen;
 
@@ -70,10 +76,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingHorizontal: 16,
     marginHorizontal: 32,
-    orderWidth: 1,
-    borderColor: 'grey',
+    borderWidth: 1,
+    borderColor: "grey",
     borderRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
+    flex: 1,
   },
   submitButton: {
     marginTop: 16,
@@ -86,11 +93,13 @@ const styles = StyleSheet.create({
     color: "#183b58",
     marginBottom: 64,
   },
-  passwordContainer: {
-    position: 'relative',
+  outerPasswordTextInput: {
+    alignItems: "stretch",
+    justifyContent: "center",
+    
   },
   iconContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     right: 10,
     zIndex: 1,
