@@ -31,7 +31,6 @@ const LoginScreen = ({ navigation }) => {
         autoCapitalize={"none"}
         autoCorrect={false}
       />
-      <View style={styles.outerPasswordTextInput}>
         <TextInput
           inputStyle={styles.inputStyle}
           value={password}
@@ -41,15 +40,14 @@ const LoginScreen = ({ navigation }) => {
           autoCapitalize={"none"}
           autoCorrect={false}
         ></TextInput>
-
+{/* 
         <TouchableOpacity onPress={togglePasswordVisiblity}>
           <MaterialCommunityIcons
             name={shown ? "eye-off" : "eye"}
             size={22}
             color="#232323"
           />
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> */}
 
       <Button
         type="solid"
@@ -61,7 +59,7 @@ const LoginScreen = ({ navigation }) => {
       </Button>
     </View>
   );
-};r
+};
 
 export default LoginScreen;
 
