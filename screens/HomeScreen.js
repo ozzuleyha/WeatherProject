@@ -1,16 +1,24 @@
-import {StyleSheet, Text, View, ImageBackground, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import Header from "../components/Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DatePicker from "../components/DatePicker";
+import { useNavigation } from "@react-navigation/native";
+import { DrawerActions } from "@react-navigation/native";
 
 const image = {
   uri: "https://c0.wallpaperflare.com/preview/327/357/108/blue-skys-tropical-palm-tree-summer.jpg",
 };
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [isDatePickerShown, setIsDatePickerShown] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isMenuShown, setIsMenuShown] = useState(false);
@@ -20,7 +28,7 @@ const HomeScreen = () => {
   };
 
   const handleMenuIconPress = () => {
-    setIsMenuShown(!isMenuShown);
+    navigation.dispatch(DrawerActions.openDrawer());
   };
 
   const handleSelectedDate = (date) => {
