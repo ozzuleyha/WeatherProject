@@ -10,7 +10,6 @@ import Header from "../components/Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DatePicker from "../components/DatePicker";
-import { useNavigation } from "@react-navigation/native";
 import { DrawerActions } from "@react-navigation/native";
 
 const image = {
