@@ -6,11 +6,11 @@ const LocationListItem = ({containerStyle, location}) => {
         <View style={[styles.container, containerStyle]}>
             <View style={styles.leftView}>
                 <Text style={styles.name}>
-                    {location.city.name + ', ' + location.city.country}
+                    {location.city + ', ' + location.country}
                 </Text>
-                <Text>{'Degree: ' + location.city.degree}</Text>
-                <Text>{'Humidity: ' + location.city.humidity}</Text>
-                <Text>{location.city.description}</Text>
+                <Text>{'Degree: ' + location.degree}</Text>
+                <Text>{'Humidity: ' + location.humidity}</Text>
+                <Text>{location.description}</Text>
             </View>
         </View>
     );

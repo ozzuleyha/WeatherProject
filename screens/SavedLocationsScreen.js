@@ -6,6 +6,7 @@ import { DrawerActions } from "@react-navigation/native";
 import LocationListItem from "../components/LocationListItem";
 import { NativeModules } from "react-native";
 import AddLocationModal from "../components/AddLocationModal";
+import Locations from "../assets/Locations";
 
 const { StatusBarManager } = NativeModules;
 
@@ -44,46 +45,6 @@ const SavedLocationsScreen = ({ navigation }) => {
     setAddLocationModalShown(false);
   };
 
-  const locations = [
-    {
-      id: 1,
-      city: {
-        name: "London",
-        country: "UK",
-        degree: "20",
-        humidity: "50",
-        description: "Sunny",
-      },
-    },
-    {
-      id: 2,
-      city: {
-        name: "Paris",
-        country: "France",
-        degree: "25",
-        humidity: "60",
-        description: "Cloudy",
-      },
-    },
-    {
-      id: 3,
-      city: {
-        name: "New York",
-        country: "USA",
-        degree: "30",
-        humidity: "70",
-        description: "Rainy",
-      },
-      id: 4,
-      city: {
-        name: "Tokyo",
-        country: "Japan",
-        degree: "20",
-        humidity: "50",
-        description: "Sunny",
-      },
-    },
-  ];
 
   return (
     <View style={styles.container}>
@@ -129,7 +90,7 @@ const SavedLocationsScreen = ({ navigation }) => {
           },
         ]}
       >
-        {locations.map((location) => (
+        {Locations.map((location) => (
           <LocationListItem
             key={location.id.toString()}
             location={location}
