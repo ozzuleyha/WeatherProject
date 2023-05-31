@@ -16,17 +16,17 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Drawer.Navigator
-          drawerContent={(props) => <CustomDrawer {...props}/>}
+          drawerContent={(props) => <CustomDrawer {...props} />}
           initialRouteName="Login"
           screenOptions={{
             headerShown: false,
-            drawerActiveBackgroundColor: '#183b58', 
-            drawerActiveTintColor: '#fff',
+            drawerActiveBackgroundColor: "#183b58",
+            drawerActiveTintColor: "#fff",
             drawerLabelStyle: {
               marginHorizontal: -25,
               fontSize: 15,
+            },
           }}
-        }
         >
           <Drawer.Screen
             name="Profile"
@@ -46,18 +46,27 @@ export default function App() {
               ),
             }}
           />
-          <Drawer.Screen name="My Locations" component={SavedLocationScreen} 
-          options={{
-            drawerIcon: ({ color }) => (
-              <Ionicons name="ios-location-outline" size={22} color={color} />
-            ),
-          }}/>
+          <Drawer.Screen
+            name="My Locations"
+            component={SavedLocationScreen}
+            options={{
+              drawerIcon: ({ color }) => (
+                <Ionicons name="ios-location-outline" size={22} color={color} />
+              ),
+            }}
+          />
           <Drawer.Screen
             name="Get Notifications"
             component={NotificationsScreen}
             options={{
               drawerIcon: ({ color }) => (
-                <Ionicons name="notifications-outline" size={22} color={color} />
+                (
+                  <Ionicons
+                    name="notifications-outline"
+                    size={22}
+                    color={color}
+                  />
+                )
               ),
             }}
           />

@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
-
+import { Text, StyleSheet, View, TouchableOpacity} from "react-native";
 import PropTypes from "prop-types";
 
 const Header = ({
@@ -11,9 +10,10 @@ const Header = ({
   title,
   onLeftIconPress,
   onRightIconPress,
+  onLayout,
 }) => {
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle]} onLayout={onLayout}>
       <TouchableOpacity style={styles.leftButton} onPress={onLeftIconPress}>
         {leftIcon}
         {leftIcon && leftIconTitle && (

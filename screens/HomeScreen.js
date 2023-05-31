@@ -4,6 +4,9 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  useWindowDimensions,
+  StatusBar,
+
 } from "react-native";
 import React, { useState } from "react";
 import Header from "../components/Header";
@@ -20,7 +23,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const HomeScreen = ({ navigation }) => {
   const [isDatePickerShown, setIsDatePickerShown] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [isMenuShown, setIsMenuShown] = useState(false);
 
   const handleDatePickerIconPress = () => {
     setIsDatePickerShown(true);
@@ -35,7 +37,11 @@ const HomeScreen = ({ navigation }) => {
     setIsDatePickerShown(false);
   };
 
+  const { width: windowWith, height: windowHeight } = useWindowDimensions();
+
   return (
+    <>
+    <StatusBar barStyle="light-content"/>
     <View style={styles.container}>
       <Header
         containerStyle={{
@@ -43,7 +49,8 @@ const HomeScreen = ({ navigation }) => {
         }}
         title={"Home"}
         leftIcon={
-          <View style={styles.outerIcon}>
+          <View style={styles.outerIcon}
+          >
             <Ionicons
               name="ios-menu-outline"
               size={36}
@@ -63,7 +70,8 @@ const HomeScreen = ({ navigation }) => {
           </View>
         }
       />
-      <ImageBackground source={image} resizeMode="cover" style={styles.image} />
+      {/* <ImageBackground source={rkequire('/Users/ozzuleyha/Desktop/weather/WeatherProject/assets/night2.jpg')} style={styles.image} /> */}
+      
       <DatePicker
         containerStyle={styles.datePickerField}
         buttonStyle={styles.datePickerButton}
@@ -73,6 +81,7 @@ const HomeScreen = ({ navigation }) => {
         onDialogCancelPress={() => setIsDatePickerShown(false)}
       />
     </View>
+    </>
   );
 };
 
@@ -81,11 +90,10 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#94b1c9",
   },
   image: {
-    flex: 1,
-    justifyContent: "center",
-    position: "relative",
+    flex: 1
   },
   text: {
     color: "white",

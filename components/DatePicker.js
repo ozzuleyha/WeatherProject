@@ -16,9 +16,7 @@ const DatePicker = ({
 }) => {
   return (
     <View style={containerStyle}>
-        {buttonComponent && (
-            buttonComponent
-        ) }
+      {buttonComponent && buttonComponent}
       <Modal
         animationType="slide"
         onDismiss={() => console.log("dismiss")}
