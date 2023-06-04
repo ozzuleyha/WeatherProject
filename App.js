@@ -87,19 +87,6 @@ export default function App() {
                 ),
               }}
             />
-            <Drawer.Screen
-              name="Get Notifications"
-              component={NotificationsScreen}
-              options={{
-                drawerIcon: ({ color }) => (
-                  <Ionicons
-                    name="notifications-outline"
-                    size={22}
-                    color={color}
-                  />
-                ),
-              }}
-            />
           </Drawer.Navigator>
         )}
       </NavigationContainer>

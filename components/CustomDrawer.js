@@ -8,10 +8,12 @@ import {
 import React from "react";
 import {
   DrawerContentScrollView,
+  DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Image } from "react-native";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const CustomDrawer = (props) => {
   return (
@@ -45,6 +47,19 @@ const CustomDrawer = (props) => {
           Jane Doe
         </Text>
         <DrawerItemList {...props} />
+        <DrawerItem
+          style={{ opacity: 0.5 }}
+          labelStyle={{ marginStart: -24, fontSize: 15 }}
+          icon={({ color }) => (
+            <Ionicons
+              style={{ margin: 0, padding: 0 }}
+              name="notifications-outline"
+              size={22}
+              color={color}
+            />
+          )}
+          label="Get Notifications"
+        />
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
         <TouchableOpacity
