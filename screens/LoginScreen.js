@@ -70,16 +70,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#94b1c9",
   },
-  inputStyle: {
-    marginTop: 8,
-    paddingHorizontal: 16,
-    marginHorizontal: 32,
-    borderWidth: 1,
-    borderColor: "grey",
-    borderRadius: 8,
-    backgroundColor: "#fff",
-    flex: 1,
-  },
   submitButton: {
     marginTop: 16,
     marginHorizontal: 16,

@@ -6,7 +6,7 @@ const TextInput = ({inputContainerStyle, inputStyle, value,  onChangeText, place
     return (
         <Input
             inputContainerStyle={[{borderBottomWidth: 0}, inputContainerStyle]}
-            inputStyle={inputStyle}
+            style={styles.inputStyle}
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
@@ -20,4 +20,14 @@ const TextInput = ({inputContainerStyle, inputStyle, value,  onChangeText, place
 export default TextInput;
 
 const styles = StyleSheet.create({
+    inputStyle: {
+        marginTop: 8,
+        paddingHorizontal: 16,
+        marginHorizontal: 32,
+        borderWidth: 1,
+        borderColor: "grey",
+        borderRadius: 8,
+        backgroundColor: "#fff",
+        flex: 1,
+      },
 });

@@ -48,12 +48,12 @@ const CustomDrawer = (props) => {
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
         <TouchableOpacity
-          onPress={() => alert("Logout")}
+          onPress={() => props.navigation.navigate("Profile")}
           style={{ paddingVertical: 16 }}
         >
-          <SimpleLineIcons name="logout" size={22} color="#fff" />
-          <View style={{ flexDirection: "row"}}>
-            <Text style={{ color: "#fff", fontSize: 18, marginLeft: 5 }}>
+          <View style={{ flexDirection: "row" }}>
+            <SimpleLineIcons name="logout" size={22} color="#fff" />
+            <Text style={{ color: "#fff", fontSize: 18, marginLeft: 12 }}>
               Logout
             </Text>
           </View>

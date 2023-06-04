@@ -7,13 +7,14 @@ import {
   useWindowDimensions,
   StatusBar,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DatePicker from "../components/DatePicker";
 import { DrawerActions } from "@react-navigation/native";
 import Locations from "../assets/Locations";
+import dayjs from "dayjs";
 
 const image = {
   uri: "https://c0.wallpaperflare.com/preview/327/357/108/blue-skys-tropical-palm-tree-summer.jpg",
@@ -33,12 +34,16 @@ const HomeScreen = ({ navigation }) => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  const handleSelectedDate = (date) => {
+  const handleDateSelected = (date) => {
     setSelectedDate(date);
     setIsDatePickerShown(false);
   };
 
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+
+  useEffect(() => {
+    console.log("Date", selectedDate);
+  }, []);
 
   return (
     <>
@@ -71,30 +76,52 @@ const HomeScreen = ({ navigation }) => {
           }
         />
         <ScrollView
-        style={{ width: windowWidth, height: windowHeight }}
-        horizontal={true}
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
+          style={{ width: windowWidth, height: windowHeight }}
+          horizontal={true}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
         >
-            {Locations.map((location, index) => {
-              let bgImage = require("../assets/night2.jpg");
-              if (location.description === "Sunny") {
-                bgImage = require("../assets/sunny.jpg");
-              } else if (location.description === "Rainy") {
-                bgImage = require("../assets/rainy.jpg");
-              } 
-              return (
+          {Locations.filter(
+            (locations) =>
+              locations.date === dayjs(selectedDate).format("YYYY-MM-DD")
+          ).map((location, index) => {
+            let bgImage = require("../assets/night2.jpg");
+            if (location.description === "Sunny") {
+              bgImage = require("../assets/sunny.jpg");
+            } else if (location.description === "Rainy") {
+              bgImage = require("../assets/rainy.jpg");
+            } else if (location.description === "Night") {
+              bgImage = require("../assets/night2.jpg");
+            } else if (location.description === "Cloudy") {
+              bgImage = require("../assets/cloudy.jpg");
+            }
+
+            return (
+              <View
+                style={{ width: windowWidth, height: windowHeight }}
+                key={index}
+              >
+                <ImageBackground
+                  source={bgImage}
+                  style={styles.image}
+                ></ImageBackground>
                 <View
-                  style={{ width: windowWidth, height: windowHeight }}
-                  key={index}
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: 20,
+                  }}
                 >
-                  <ImageBackground
-                    source={bgImage}
-                    style={styles.image}
-                  ></ImageBackground>
+                  <Text style={styles.text}>{location.city}</Text>
+                  <Text style={styles.text}>{location.degree}</Text>
+                  <Text style={styles.text}>{location.description}</Text>
+                  <Text style={styles.text}>{location.date}</Text>
                 </View>
-              );
-            })}
+              </View>
+            );
+          })}
         </ScrollView>
 
         <DatePicker
@@ -102,7 +129,7 @@ const HomeScreen = ({ navigation }) => {
           buttonStyle={styles.datePickerButton}
           shown={isDatePickerShown}
           selectedDate={selectedDate}
-          onDateSelected={handleSelectedDate}
+          onDateSelected={handleDateSelected}
           onDialogCancelPress={() => setIsDatePickerShown(false)}
         />
       </View>
@@ -118,6 +145,12 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    opacity: 0.9,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   text: {
     color: "white",
