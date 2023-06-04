@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 
-let initialBgImage = require("../assets/cloudy.jpg");
+const initialBgImage = require("../assets/cloudy.jpg");
+const initialIcon = require("../assets/cloudy.svg");
 
 const LocationListItem = ({ containerStyle, location }) => {
   const [bgImage, setBgImage] = useState(initialBgImage);
+  const [icon, setIcon] = useState(initialIcon);
 
   useEffect(() => {
     const imageLinks = [
@@ -30,11 +32,42 @@ const LocationListItem = ({ containerStyle, location }) => {
       },
     ];
 
+    const iconLinks = [
+      {
+        description: "Sunny",
+        icon: require("../assets/sun.png"),
+      },
+      {
+        description: "Rainy",
+        icon: require("../assets/rain.png"),
+      },
+      {
+        description: "Night",
+        icon: require("../assets/moon.png"),
+      },
+      {
+        description: "Cloudy",
+        icon: require("../assets/cloud.png"),
+      },
+      {
+        description: "Windy",
+        icon: require("../assets/wind.png"),
+      },
+    ];
+
     const imageOfLocation = imageLinks.find(
       (imageLink) => imageLink.description === location.description
     ).image;
+    const iconOfLocation = iconLinks.find(
+      (iconLink) => iconLink.description === location.description
+    ).icon;
+
     if (imageOfLocation) {
       setBgImage(imageOfLocation);
+    }
+
+    if (iconOfLocation) {
+      setIcon(iconOfLocation);
     }
   }, [location]);
 
@@ -48,25 +81,35 @@ const LocationListItem = ({ containerStyle, location }) => {
           bottom: 0,
           position: "absolute",
           opacity: 0.9,
+          borderRadius: 16,
         }}
         source={bgImage}
       ></ImageBackground>
-
-      <View style={styles.leftView}>
-        <Text style={styles.name}>
-          {location.city + ", " + location.country}
-        </Text>
-        <Text>{"Degree: " + location.degree}</Text>
-        <Text>{"Humidity: " + location.humidity}</Text>
-        <Text>{location.description}</Text>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderRadius: 16,
+        }}
+      >
+        <View style={styles.leftView}>
+          <Text style={styles.name}>
+            {location.city + ", " + location.country}
+          </Text>
+          <Text>{"Degree: " + location.degree}</Text>
+          <Text>{"Humidity: " + location.humidity}</Text>
+          <Text>{location.description}</Text>
+        </View>
         <ImageBackground
           style={{
+            padding: 10,
             width: 50,
             height: 50,
-            borderRadius: 25,
             overflow: "hidden",
           }}
-          source={require("../assets/night2.jpg")}
+          source={icon}
         ></ImageBackground>
       </View>
     </View>
@@ -82,7 +125,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
-    borderRadius: 5,
+    borderRadius: 16,
     backgroundColor: "#fff",
     flexDirection: "row",
     justifyContent: "space-between",

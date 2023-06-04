@@ -14,7 +14,7 @@ import LocationListItem from "../components/LocationListItem";
 import { NativeModules } from "react-native";
 import AddLocationModal from "../components/AddLocationModal";
 import Locations from "../assets/Locations";
-import dayjs from "dayjs"; 
+import dayjs from "dayjs";
 
 const { StatusBarManager } = NativeModules;
 
@@ -27,7 +27,6 @@ const SavedLocationsScreen = ({ navigation }) => {
   useEffect(() => {
     StatusBarManager.getHeight((statusBarInfo) => {
       setStatusBarHeight(statusBarInfo.height);
-      console.log("savedLocaitonsDate", date) 
     });
   }, []);
 
@@ -87,13 +86,15 @@ const SavedLocationsScreen = ({ navigation }) => {
           },
         ]}
       >
-        {Locations.filter((locations, index) => locations.date === date).map((location) => (
-          <LocationListItem
-            key={location.id.toString()}
-            location={location}
-            containerStyle={styles.listItem}
-          />
-        ))}
+        {Locations.filter((locations, index) => locations.date === date).map(
+          (location) => (
+            <LocationListItem
+              key={location.id.toString()}
+              location={location}
+              containerStyle={styles.listItem}
+            />
+          )
+        )}
 
         <AddLocationModal
           shown={addLocationModalShown}
