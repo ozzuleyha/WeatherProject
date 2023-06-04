@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
 const Header = ({
@@ -14,7 +14,7 @@ const Header = ({
 }) => {
   return (
     <View style={[styles.container, containerStyle]} onLayout={onLayout}>
-      <TouchableOpacity style={styles.leftButton} onPress={onLeftIconPress}>
+      <TouchableOpacity style={styles.headerButton} onPress={onLeftIconPress}>
         {leftIcon}
         {leftIcon && leftIconTitle && (
           <Text style={styles.leftIconTitle}>{leftIconTitle}</Text>
@@ -23,7 +23,7 @@ const Header = ({
 
       {title && <Text style={styles.title}>{title}</Text>}
 
-      <TouchableOpacity style={styles.rightButton} onPress={onRightIconPress}>
+      <TouchableOpacity style={styles.headerButton} onPress={onRightIconPress}>
         {rightIcon}
       </TouchableOpacity>
     </View>
@@ -43,10 +43,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     opacity: 1,
   },
-  leftButton: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+  headerButton: {
     zIndex: 1,
   },
   leftIconTitle: {

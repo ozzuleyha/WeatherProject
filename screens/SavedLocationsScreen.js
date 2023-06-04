@@ -23,11 +23,14 @@ const SavedLocationsScreen = ({ navigation }) => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [addLocationModalShown, setAddLocationModalShown] = useState(false);
   const [date, setDate] = useState(dayjs(new Date()).format("YYYY-MM-DD"));
+  const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     StatusBarManager.getHeight((statusBarInfo) => {
       setStatusBarHeight(statusBarInfo.height);
     });
+
+    setLocations(Locations);
   }, []);
 
   const handleMenuIconPress = () => {
@@ -38,8 +41,19 @@ const SavedLocationsScreen = ({ navigation }) => {
     setAddLocationModalShown(true);
   };
 
-  const handleSubmitButton = (cityName, countryName) => {
+  const handleSubmitButtonPress = (cityName, countryName) => {
     setAddLocationModalShown(false);
+    const newLocation = {
+      id: locations.length + 1,
+      city: cityName,
+      country: countryName,
+      date: dayjs(new Date()).format("YYYY-MM-DD"),
+      degree: 20,
+      description: "Cloudy",
+      humidity: 0.8,
+    };
+
+    setLocations([...locations, newLocation]);
   };
 
   return (
@@ -86,20 +100,21 @@ const SavedLocationsScreen = ({ navigation }) => {
           },
         ]}
       >
-        {Locations.filter((locations, index) => locations.date === date).map(
-          (location) => (
+        {locations
+          .filter((location, index) => location.date === date)
+          .map((location) => (
             <LocationListItem
               key={location.id.toString()}
               location={location}
               containerStyle={styles.listItem}
             />
-          )
-        )}
+          ))}
 
         <AddLocationModal
           shown={addLocationModalShown}
+          title={"Add Location"}
           onDialogCancelPress={() => setAddLocationModalShown(false)}
-          onSubmit={handleSubmitButton}
+          onSubmitButtonPress={handleSubmitButtonPress}
         />
       </ScrollView>
     </View>

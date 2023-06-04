@@ -6,18 +6,13 @@ import { Button } from "@rneui/themed";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 as Logo } from "@expo/vector-icons";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, onSubmitButtonPress }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [shown, setShown] = useState(true);
 
   const togglePasswordVisiblity = () => {
     setShown(!shown);
-  };
-
-  const HandleSubmitButton = () => {
-    console.log(`Username: ${username}\nPassword: ${password}`);
-    navigation.navigate("Home");
   };
 
   return (
@@ -31,16 +26,16 @@ const LoginScreen = ({ navigation }) => {
         autoCapitalize={"none"}
         autoCorrect={false}
       />
-        <TextInput
-          inputStyle={styles.inputStyle}
-          value={password}
-          placeholder={"Password"}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={shown}
-          autoCapitalize={"none"}
-          autoCorrect={false}
-        ></TextInput>
-{/* 
+      <TextInput
+        inputStyle={styles.inputStyle}
+        value={password}
+        placeholder={"Password"}
+        onChangeText={(text) => setPassword(text)}
+        secureTextEntry={shown}
+        autoCapitalize={"none"}
+        autoCorrect={false}
+      ></TextInput>
+      {/* 
         <TouchableOpacity onPress={togglePasswordVisiblity}>
           <MaterialCommunityIcons
             name={shown ? "eye-off" : "eye"}
@@ -53,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
         type="solid"
         radius={999}
         buttonStyle={styles.submitButton}
-        onPress={HandleSubmitButton}
+        onPress={onSubmitButtonPress && onSubmitButtonPress}
       >
         Submit
       </Button>
@@ -84,7 +79,6 @@ const styles = StyleSheet.create({
   outerPasswordTextInput: {
     alignItems: "stretch",
     justifyContent: "center",
-    
   },
   iconContainer: {
     position: "absolute",

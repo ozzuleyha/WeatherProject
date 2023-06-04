@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Modal } from "react-native";
 import React, { useState } from "react";
 import { Button } from "@rneui/themed";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
+import dayjs from "dayjs";
 
 const DatePicker = ({
   containerStyle,
@@ -13,6 +14,8 @@ const DatePicker = ({
   onDialogCancelPress,
   shown,
   buttonComponent,
+  minimumDate,
+  maximumDate,
 }) => {
   return (
     <View style={containerStyle}>
@@ -30,6 +33,8 @@ const DatePicker = ({
               display="inline"
               value={selectedDate}
               onChange={(e, date) => onDateSelected && onDateSelected(date)}
+              minimumDate={minimumDate}
+              maximumDate={maximumDate}
             />
           </View>
           <Button

@@ -65,7 +65,6 @@ export default Locations = [
   {
     id: 8,
     city: "New York",
-
     country: "USA",
     degree: "30",
     humidity: "70",

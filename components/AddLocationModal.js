@@ -4,25 +4,21 @@ import TextInput from "../components/TextInput";
 import { Button } from "@rneui/themed";
 
 const AddLocationModal = ({
-  containerStyle,
+  title,
   titleStyle,
   buttonStyle,
-  onPress,
   onDialogCancelPress,
   shown,
-  buttonComponent,
-  onSubmit,
-  changedCity,
-  changedCountry,
+  onSubmitButtonPress,
 }) => {
   const [cityName, setCityName] = useState("");
   const [countryName, setCountryName] = useState("");
 
-  const HandleSubmitButton = () => {
-    console.log(`City: ${cityName}\nCountry: ${countryName}`);
-    onSubmit(cityName, countryName);
+  const handleSubmitButtonPress = () => {
+    onSubmitButtonPress(cityName, countryName);
 
-    
+    setCityName("");
+    setCountryName("");
   };
 
   return (
@@ -33,11 +29,10 @@ const AddLocationModal = ({
       animationType="slide"
       visible={shown}
       transparent={true}
-      onDismiss={() => console.log("dismiss")}
-      onRequestClose={() => console.log("cancel")}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
+          <Text style={[styles.title, titleStyle]}>{title}</Text>
           <TextInput
             inputStyle={styles.inputStyle}
             label="City"
@@ -56,14 +51,14 @@ const AddLocationModal = ({
             type="solid"
             radius={999}
             buttonStyle={styles.submitButton}
-            onSubmit={onSubmit}
+            onPress={handleSubmitButtonPress}
           >
             Submit
           </Button>
         </View>
 
         <Button
-          style={styles.cancelButton}
+          style={[styles.button, buttonStyle]}
           title={"Cancel"}
           radius={8}
           onPress={onDialogCancelPress}
@@ -76,6 +71,11 @@ const AddLocationModal = ({
 export default AddLocationModal;
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
   button: {
     borderColor: "grey",
     borderWidth: 1.15,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     marginTop: 8,
     paddingHorizontal: 16,
-    marginHorizontal: 32,
+    marginHorizontal: 0,
     borderWidth: 1,
     borderColor: "grey",
     borderRadius: 8,

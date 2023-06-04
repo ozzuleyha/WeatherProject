@@ -131,6 +131,8 @@ const HomeScreen = ({ navigation }) => {
           selectedDate={selectedDate}
           onDateSelected={handleDateSelected}
           onDialogCancelPress={() => setIsDatePickerShown(false)}
+          minimumDate={dayjs("2023-05-31").toDate()}
+          maximumDate={dayjs("2023-06-10").toDate()}
         />
       </View>
     </>

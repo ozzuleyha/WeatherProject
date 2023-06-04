@@ -48,7 +48,9 @@ const CustomDrawer = (props) => {
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: "#ccc" }}>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate("Profile")}
+          onPress={() =>
+            props.onLogoutButtonPress && props.onLogoutButtonPress()
+          }
           style={{ paddingVertical: 16 }}
         >
           <View style={{ flexDirection: "row" }}>
