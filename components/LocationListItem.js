@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 
 const initialBgImage = require("../assets/cloudy.jpg");
-const initialIcon = require("../assets/cloudy.svg");
+const initialIcon = require("../assets/cloud.png");
 
 const LocationListItem = ({ containerStyle, location }) => {
   const [bgImage, setBgImage] = useState(initialBgImage);
