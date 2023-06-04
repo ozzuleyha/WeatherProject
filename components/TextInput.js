@@ -4,7 +4,6 @@ import { Input } from "@rneui/base";
 
 const TextInput = ({
   inputContainerStyle,
-  inputStyle,
   value,
   onChangeText,
   placeholder,

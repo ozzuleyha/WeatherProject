@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation, onSubmitButtonPress }) => {
     <View style={styles.container}>
       <Logo style={styles.LogoStyle} name={"cloud-sun-rain"} />
       <TextInput
-        inputStyle={styles.inputStyle}
+        inputContainerStyle={styles.input}
         value={username}
         placeholder={"Username"}
         onChangeText={(text) => setUsername(text)}
@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation, onSubmitButtonPress }) => {
         autoCorrect={false}
       />
       <TextInput
-        inputStyle={styles.inputStyle}
+        inputContainerStyle={styles.input}
         value={password}
         placeholder={"Password"}
         onChangeText={(text) => setPassword(text)}
@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation, onSubmitButtonPress }) => {
         buttonStyle={styles.submitButton}
         onPress={onSubmitButtonPress && onSubmitButtonPress}
       >
-        Submit
+        Login
       </Button>
     </View>
   );
@@ -64,6 +64,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#94b1c9",
+  },
+  input: {
+    marginHorizontal: 16,
   },
   submitButton: {
     marginTop: 16,
