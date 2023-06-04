@@ -1,22 +1,45 @@
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-let bgImage = require("../assets/cloudy.jpg");
+let initialBgImage = require("../assets/cloudy.jpg");
 
 const LocationListItem = ({ containerStyle, location }) => {
+  const [bgImage, setBgImage] = useState(initialBgImage);
+
+  useEffect(() => {
+    const imageLinks = [
+      {
+        description: "Sunny",
+        image: require("../assets/sunny.jpg"),
+      },
+      {
+        description: "Rainy",
+        image: require("../assets/rainy.jpg"),
+      },
+      {
+        description: "Night",
+        image: require("../assets/night2.jpg"),
+      },
+      {
+        description: "Cloudy",
+        image: require("../assets/cloudy.jpg"),
+      },
+      {
+        description: "Windy",
+        image: require("../assets/windy.jpeg"),
+      },
+    ];
+
+    const imageOfLocation = imageLinks.find(
+      (imageLink) => imageLink.description === location.description
+    ).image;
+    if (imageOfLocation) {
+      setBgImage(imageOfLocation);
+    }
+  }, [location]);
+
   return (
     <View style={[styles.container, containerStyle]}>
-
-      {/* {
-        if (location.description === "Sunny") {
-          bgImage = require("../assets/sunny.jpg");
-        } else if (location.description === "Rainy") {
-          bgImage = require("../assets/rainy.jpg");
-        } else if (location.description === "Night") {
-          bgImage = require("../assets/night2.jpg");
-        } else if (location.description === "Cloudy") {
-          bgImage = require("../assets/cloudy.jpg");
-        }} */}
       <ImageBackground
         style={{
           top: 0,
@@ -26,7 +49,7 @@ const LocationListItem = ({ containerStyle, location }) => {
           position: "absolute",
           opacity: 0.9,
         }}
-        source={require("../assets/cloudy.jpg")}
+        source={bgImage}
       ></ImageBackground>
 
       <View style={styles.leftView}>
@@ -65,8 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  leftView: {
-  },
+  leftView: {},
   name: {
     fontSize: 18,
     fontWeight: "bold",
