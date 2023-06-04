@@ -2,6 +2,8 @@
   "expo": {
     "name": "WeatherProject",
     "slug": "WeatherProject",
+    "privacy": "public",
+    "description": "Weather App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +27,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6786fa03-3386-4550-9b8f-f2cbbcbd47aa"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6786fa03-3386-4550-9b8f-f2cbbcbd47aa"
     }
   }
 }
