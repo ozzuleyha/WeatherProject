@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   useWindowDimensions,
   StatusBar,
+  Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
@@ -14,6 +15,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import DatePicker from "../components/DatePicker";
 import { DrawerActions } from "@react-navigation/native";
 import Locations from "../assets/Locations";
+import Next5Days from "../assets/Next5Days";
 import dayjs from "dayjs";
 
 const image = {
@@ -39,11 +41,21 @@ const HomeScreen = ({ navigation }) => {
     setIsDatePickerShown(false);
   };
 
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const getIconFromDescription = (description) => {
+    if (description === "Sunny") {
+      return require("../assets/sun.png");
+    } else if (description === "Rainy") {
+      return require("../assets/rain.png");
+    } else if (description === "Night") {
+      return require("../assets/moon.png");
+    } else if (description === "Cloudy") {
+      return require("../assets/cloud.png");
+    } else if (description === "Windy") {
+      return require("../assets/wind.png");
+    }
+  };
 
-  useEffect(() => {
-    console.log("Date", selectedDate);
-  }, []);
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
   return (
     <>
@@ -94,6 +106,8 @@ const HomeScreen = ({ navigation }) => {
               bgImage = require("../assets/night2.jpg");
             } else if (location.description === "Cloudy") {
               bgImage = require("../assets/cloudy.jpg");
+            } else if (location.description === "Windy") {
+              bgImage = require("../assets/windy.jpg");
             }
 
             return (
@@ -105,20 +119,146 @@ const HomeScreen = ({ navigation }) => {
                   source={bgImage}
                   style={styles.image}
                 ></ImageBackground>
-                <View
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: 20,
-                  }}
+                <ScrollView
+                  style={{ marginTop: 120, marginHorizontal: 16 }}
+                  showsVerticalScrollIndicator={false}
                 >
-                  <Text style={styles.text}>{location.city}</Text>
-                  <Text style={styles.text}>{location.degree}</Text>
-                  <Text style={styles.text}>{location.description}</Text>
-                  <Text style={styles.text}>{location.date}</Text>
-                </View>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+                      {location.city}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 30,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {location.description}
+                    </Text>
+                  </View>
+                  <Text style={{ fontSize: 100 }}>{location.degree}°</Text>
+
+                  <View
+                    style={{
+                      marginTop: 75,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      backgroundColor: "#00000030",
+                      padding: 16,
+                      borderRadius: 12,
+                    }}
+                  >
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderendcolor: "#fff",
+                      }}
+                    >
+                      <Text style={{ fontSize: 20 }}>{location.uvIndex}</Text>
+                      <Text style={{ fontSize: 20 }}>UV Index</Text>
+                    </View>
+
+                    <View
+                      style={{ alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Text style={{ fontSize: 20 }}>
+                        {location.windSpeed} km/h
+                      </Text>
+                      <Text style={{ fontSize: 20 }}>Wind Speed</Text>
+                    </View>
+                    <View
+                      style={{ alignItems: "center", justifyContent: "center" }}
+                    >
+                      <Text style={{ fontSize: 20 }}>
+                        {location.rainChance}%
+                      </Text>
+                      <Text style={{ fontSize: 20 }}>Rain</Text>
+                    </View>
+                  </View>
+
+                  <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    style={{ marginTop: 16 }}
+                  >
+                    {location.hourly.map((hour, index) => {
+                      return (
+                        <View
+                          style={{
+                            backgroundColor: "#00000030",
+                            paddingHorizontal: 24,
+                            padding: 12,
+                            borderRadius: 12,
+                            marginRight: 16,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                          key={index}
+                        >
+                          <Text style={{ fontSize: 20 }}>{hour.time}</Text>
+                          <Image
+                            source={getIconFromDescription(hour.description)}
+                            style={{ width: 50, height: 50 }}
+                          />
+                          <Text style={{ fontSize: 20 }}>{hour.degree}°</Text>
+                        </View>
+                      );
+                    })}
+                  </ScrollView>
+
+                  <View
+                    style={{
+                      marginTop: 16,
+                      backgroundColor: "#00000030",
+                      padding: 16,
+                      borderRadius: 12,
+                    }}
+                  >
+                    {Next5Days.map((day, index) => {
+                      return (
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            marginBottom: 16,
+                          }}
+                          key={index}
+                        >
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Image
+                              source={getIconFromDescription(day.description)}
+                              style={{ width: 30, height: 30 }}
+                            />
+                            <Text style={{ fontSize: 20, marginStart: 8 }}>
+                              {day.date}
+                            </Text>
+                          </View>
+
+                          <View style={{ flexDirection: "row" }}>
+                            <Text style={{ fontSize: 20 }}>
+                              {day.minDegree}° /{" "}
+                            </Text>
+
+                            <Text style={{ fontSize: 20 }}>
+                              {day.maxDegree}°
+                            </Text>
+                          </View>
+                        </View>
+                      );
+                    })}
+                  </View>
+                </ScrollView>
               </View>
             );
           })}
@@ -147,7 +287,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    opacity: 0.9,
+    opacity: 0.7,
     position: "absolute",
     top: 0,
     left: 0,

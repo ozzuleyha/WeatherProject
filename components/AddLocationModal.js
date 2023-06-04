@@ -80,8 +80,7 @@ const styles = StyleSheet.create({
     borderColor: "grey",
     borderWidth: 1.15,
     borderRadius: 8,
-    flex: 1,
-    justifyContent: "flex-start",
+    marginHorizontal: 32,
   },
   buttonTitle: {
     color: "black",
