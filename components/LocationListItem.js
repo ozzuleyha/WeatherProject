@@ -28,7 +28,7 @@ const LocationListItem = ({ containerStyle, location }) => {
       },
       {
         description: "Windy",
-        image: require("../assets/windy.jpeg"),
+        image: require("../assets/windy.jpg"),
       },
     ];
 
