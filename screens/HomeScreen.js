@@ -129,19 +129,20 @@ const HomeScreen = ({ navigation }) => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+                    <Text style={{ fontSize: 30, fontWeight: "bold", color: '#fff'}}>
                       {location.city}
                     </Text>
                     <Text
                       style={{
                         fontSize: 30,
                         fontWeight: "bold",
+                        color: '#fff',
                       }}
                     >
                       {location.description}
                     </Text>
                   </View>
-                  <Text style={{ fontSize: 100 }}>{location.degree}°</Text>
+                  <Text style={{ fontSize: 100, color: '#fff' }}>{location.degree}°</Text>
 
                   <View
                     style={{
@@ -160,32 +161,32 @@ const HomeScreen = ({ navigation }) => {
                         borderendcolor: "#fff",
                       }}
                     >
-                      <Text style={{ fontSize: 20 }}>{location.uvIndex}</Text>
-                      <Text style={{ fontSize: 20 }}>UV Index</Text>
+                      <Text style={styles.scrollText}>{location.uvIndex}</Text>
+                      <Text style={styles.scrollText}>UV Index</Text>
                     </View>
 
                     <View
                       style={{ alignItems: "center", justifyContent: "center" }}
                     >
-                      <Text style={{ fontSize: 20 }}>
+                      <Text style={styles.scrollText}>
                         {location.windSpeed} km/h
                       </Text>
-                      <Text style={{ fontSize: 20 }}>Wind Speed</Text>
+                      <Text style={styles.scrollText}>Wind Speed</Text>
                     </View>
                     <View
                       style={{ alignItems: "center", justifyContent: "center" }}
                     >
-                      <Text style={{ fontSize: 20 }}>
+                      <Text style={styles.scrollText}>
                         {location.rainChance}%
                       </Text>
-                      <Text style={{ fontSize: 20 }}>Rain</Text>
+                      <Text style={styles.scrollText}>Rain</Text>
                     </View>
                   </View>
 
                   <ScrollView
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    style={{ marginTop: 16 }}
+                    style={{ marginTop: 16, borderRadius: 12 }}
                   >
                     {location.hourly.map((hour, index) => {
                       return (
@@ -201,12 +202,12 @@ const HomeScreen = ({ navigation }) => {
                           }}
                           key={index}
                         >
-                          <Text style={{ fontSize: 20 }}>{hour.time}</Text>
+                          <Text style={styles.scrollText}>{hour.time}</Text>
                           <Image
                             source={getIconFromDescription(hour.description)}
                             style={{ width: 50, height: 50 }}
                           />
-                          <Text style={{ fontSize: 20 }}>{hour.degree}°</Text>
+                          <Text style={styles.scrollText}>{hour.degree}°</Text>
                         </View>
                       );
                     })}
@@ -240,17 +241,17 @@ const HomeScreen = ({ navigation }) => {
                               source={getIconFromDescription(day.description)}
                               style={{ width: 30, height: 30 }}
                             />
-                            <Text style={{ fontSize: 20, marginStart: 8 }}>
+                            <Text style={{ fontSize: 20, marginStart: 8, color: '#fff' }}>
                               {day.date}
                             </Text>
                           </View>
 
                           <View style={{ flexDirection: "row" }}>
-                            <Text style={{ fontSize: 20 }}>
+                            <Text style={styles.scrollText}>
                               {day.minDegree}° /{" "}
                             </Text>
 
-                            <Text style={{ fontSize: 20 }}>
+                            <Text style={styles.scrollText}>
                               {day.maxDegree}°
                             </Text>
                           </View>
@@ -284,6 +285,10 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollText: {
+    fontSize: 20,
+    color: '#fff',
   },
   image: {
     flex: 1,
